@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BootstrapDemo</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- Start Echart js -->
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+   <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+   <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+	
+	<!-- end echart -->
+</head>
+<body bgcolor ="#020d22">
+
+
+<script>
+	<%@ page contentType="text/html; charset=utf-8" %>
+	<%@ page language="java" %> 
+	<%@ page import="com.mysql.jdbc.Driver" %> 
+	<%@ page import="java.sql.*" %> 
+	<%@ page import="java.util.*" %> 
+<% 
+						//驱动程序名 
+						String driverName="com.mysql.jdbc.Driver"; 
+						//数据库用户名 
+						String userName="root"; 
+						//密码 
+						String userPasswd="lixueqing"; 
+						//数据库名 
+						String dbName="flight"; 
+						//表名 
+						String tableName="sheet1"; 
+						//联结字符串 
+						String url="jdbc:mysql://localhost/"+dbName+"?user="+userName+"&password="+userPasswd; 
+						Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+						Connection connection=DriverManager.getConnection(url); 
+						Statement statement = connection.createStatement(); 
+						String sql="SELECT * FROM "+tableName+" order by rank"; 
+						ResultSet rs = statement.executeQuery(sql); 
+						//获得数据结果集合 
+						ResultSetMetaData rmeta = rs.getMetaData(); 
+						//确定数据集的列数，亦字段数 
+						int numColumns=rmeta.getColumnCount(); 
+						// 输出每一个数据值 
+						
+%>
+
+<%
+			int count[]=new int[100];
+			String name[]=new String[100];
+			int j=0;
+			while(rs.next()) { 
+				
+				name[j]=rs.getString(1);	
+				count[j]=Integer.parseInt(rs.getString(3));
+					out.print(name[j]+" <font color=blue>");  
+					out.print("<br>");
+					out.print(count[j]+" <font color=blue>");  
+					out.print("<br>");
+						j++;
+				}	
+%>
+</script>
+
+	<script type="text/javascript" src="js/index.js">	</script>	
+	<header class="header">
+		<div class="container">
+			<div class="chart" id="chart5"></div>
+			<script type="text/javascript" src="js/chart5.js">	</script>	
+		</div>
+	</header>
+	
+	<nav class="main-nav-outer" id="main-nav" style="z-index:1000;">
+		<div class="contianer">
+			<ul class="main-nav">
+				<li><a href="#part1">遇难人数</a></li>
+				<li><a href="#part2">安全建议</a></li>
+				<li><a href="#part3">事故原因</a></li>
+				<li class="small-logo">
+					<a href="#header">
+						<img src="image/plane-logo.png" alt="plane" height="50px" width="50px">
+					</a>
+				</li>
+				<li><a href="#part4">赔偿方式</a></li>
+				<li><a href="#part5">航空公司</a></li>
+				<li><a href="#part6">空难预测</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<section class="main-section" id="part1">
+
+		<div class="container">
+			<div class="chart" id="chart1"></div>
+       		<script type="text/javascript" src="js/chart1.js">	</script>		
+		</div>
+	</section>
+	<section class="main-section" id="part2">
+		<div class="container">
+			<div class="chart" id="chart2"></div>
+			<script type="text/javascript" src="js/chart2.js">	</script>	
+		</div>
+	</section>
+	<section class="main-section" id="part3">
+		<div class="container">
+			<div class="chart" id="chart3"></div>
+			<script type="text/javascript" src="js/chart3.js">	</script>	
+		</div>
+	</section>
+	<section class="main-section" id="part4">
+		<div class="container">
+			<div class="chart" id="chart4"></div>
+			<script type="text/javascript" src="js/chart4.js">	</script>	
+		</div>
+	</section>
+	<section class="main-section" id="part5">
+		<div class="container">
+			<div class="chart" id="chart5">
+				 <svg width="1000" height="1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				   <g></g>
+				   <g transform="translate(500,300)scale(1.573770523071289,1.573770523071289)">
+				    <text text-anchor="middle" transform="translate(131,-103)rotate(-20.526315689086914)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(156, 158, 222);">
+				     胭脂航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(192,-89)rotate(36.315788269042976)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);">
+				     南非航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(72,-32)rotate(59.99999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(140, 162, 82);">
+				     中国国际航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-2,-148)rotate(26.842105865478516)" style="font-size: 10px; font-family: bold; fill: rgb(181, 207, 107);">
+				     摩洛哥皇家航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-76,21)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(206, 219, 156);">
+				     乐桃航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(18,-69)rotate(-6.315789222717285)" style="font-size: 10px; font-family: bold; fill: rgb(140, 109, 49);">
+				     S7航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-74,5)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(189, 158, 57);">
+				     厦门航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-65,-67)rotate(-20.52631568908691)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 186, 82);">
+				     马耳他航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-140,-36)rotate(59.999999999999986)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(231, 203, 148);">
+				     艾莱皇家航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-52,55)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(132, 60, 57);">
+				     肯尼亚航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(202,-121)rotate(-25.263158798217766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(173, 73, 74);">
+				     老虎航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(85,12)rotate(31.578947067260746)" style="font-size: 10px; font-family: bold; fill: rgb(214, 97, 107);">
+				     诺斯特姆航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-198,16)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 150, 156);">
+				     伏林航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-145,84)rotate(7.894736766815186)" style="font-size: 10px; font-family: bold; fill: rgb(123, 65, 115);">
+				     美鹰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(206,108)rotate(7.894736766815186)" style="font-size: 10px; font-family: bold; fill: rgb(165, 81, 148);">
+				     夏威夷航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-5,-124)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(206, 109, 189);">
+				     柏林航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-232,-17)rotate(-6.315789222717286)" style="font-size: 10px; font-family: bold; fill: rgb(222, 158, 214);">
+				     海湾航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-62,-146)rotate(-25.26315879821777)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(57, 59, 121);">
+				     吉祥航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-185,-12)rotate(31.578947067260746)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(82, 84, 163);">
+				     冰岛航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(198,81)rotate(17.368421554565433)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(107, 110, 207);">
+				     斯里兰卡航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(157,-129)rotate(-20.52631568908691)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(156, 158, 222);">
+				     塞舌尔航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-65,-104)rotate(50.52631759643555)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);">
+				     波兰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(79,95)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(140, 162, 82);">
+				     美国联合航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-76,-26)rotate(-29.999999999999993)" style="font-size: 10px; font-family: bold; fill: rgb(181, 207, 107);">
+				     毛里求斯航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-223,-45)rotate(-29.999999999999993)" style="font-size: 10px; font-family: bold; fill: rgb(206, 219, 156);">
+				     瑞安航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(119,70)rotate(-25.26315879821777)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(140, 109, 49);">
+				     斐济航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(133,79)rotate(-25.263158798217766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(189, 158, 57);">
+				     美国航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(58,73)rotate(22.10526275634766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 186, 82);">
+				     捷特航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-71,116)rotate(7.894736766815187)" style="font-size: 10px; font-family: bold; fill: rgb(231, 203, 148);">
+				     中国东方航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-230,132)rotate(-29.999999999999993)" style="font-size: 10px; font-family: bold; fill: rgb(132, 60, 57);">
+				     阿塞拜疆航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-155,146)rotate(7.8947367668151855)" style="font-size: 10px; font-family: bold; fill: rgb(173, 73, 74);">
+				     越洋航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(213,56)rotate(-15.789473533630371)" style="font-size: 10px; font-family: bold; fill: rgb(214, 97, 107);">
+				     巴拿马航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-117,33)rotate(22.10526275634766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 150, 156);">
+				     布鲁塞尔航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(247,121)rotate(-25.26315879821777)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(123, 65, 115);">
+				     菲律宾航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-22,19)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(165, 81, 148);">
+				     汤姆森航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-224,-120)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(206, 109, 189);">
+				     北欧航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(128,18)rotate(26.842105865478512)" style="font-size: 10px; font-family: bold; fill: rgb(222, 158, 214);">
+				     欧洲之翼航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-35,88)rotate(50.52631759643554)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(57, 59, 121);">
+				     意大利航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(143,115)rotate(-1.5789473056793204)" style="font-size: 10px; font-family: bold; fill: rgb(82, 84, 163);">
+				     葡萄牙航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-76,95)rotate(3.1578946113586426)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(107, 110, 207);">
+				     捷星亚洲航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-184,102)rotate(-20.52631568908692)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(156, 158, 222);">
+				     酷航
+				    </text>
+				    <text text-anchor="middle" transform="translate(-187,-45)rotate(-25.26315879821777)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);">
+				     拉塔姆航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-20,143)rotate(3.1578946113586426)" style="font-size: 10px; font-family: bold; fill: rgb(140, 162, 82);">
+				     西捷航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(44,-98)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(181, 207, 107);">
+				     印地高航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(182,128)rotate(-25.263158798217773)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(206, 219, 156);">
+				     胜安航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-82,81)rotate(3.1578946113586426)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(140, 109, 49);">
+				     波特航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(107,-20)rotate(31.578947067260746)" style="font-size: 10px; font-family: bold; fill: rgb(189, 158, 57);">
+				     西南航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-129,-119)rotate(-6.315789222717285)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(231, 186, 82);">
+				     巴西蔚蓝航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(95,140)rotate(60)" style="font-size: 10px; font-family: bold; fill: rgb(231, 203, 148);">
+				     沙特阿拉伯航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(100,-135)rotate(-6.315789222717289)" style="font-size: 10px; font-family: bold; fill: rgb(132, 60, 57);">
+				     哥伦比亚国家航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-208,-90)rotate(-11.052631378173828)" style="font-size: 10px; font-family: bold; fill: rgb(173, 73, 74);">
+				     墨西哥航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(108,-76)rotate(-15.789473533630373)" style="font-size: 10px; font-family: bold; fill: rgb(214, 97, 107);">
+				     埃塞尔比亚航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(14,-88)rotate(3.1578946113586426)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(231, 150, 156);">
+				     越南航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(145,-43)rotate(-15.789473533630371)" style="font-size: 10px; font-family: bold; fill: rgb(123, 65, 115);">
+				     阿斯塔纳航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(52,107)rotate(-11.052631378173828)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(165, 81, 148);">
+				     亚航X
+				    </text>
+				    <text text-anchor="middle" transform="translate(196,146)rotate(-6.315789222717285)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(206, 109, 189);">
+				     捷星航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(0,-51)rotate(36.31578826904297)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(222, 158, 214);">
+				     维珍航空美国
+				    </text>
+				    <text text-anchor="middle" transform="translate(252,83)rotate(36.315788269042976)" style="font-size: 10px; font-family: bold; fill: rgb(57, 59, 121);">
+				     伊比利亚航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(34,43)rotate(36.31578826904297)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(82, 84, 163);">
+				     易捷航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-197,79)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(107, 110, 207);">
+				     英国航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-163,-133)rotate(3.1578946113586426)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(156, 158, 222);">
+				     捷蓝航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-257,101)rotate(31.578947067260746)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);">
+				     爱尔兰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-143,-7)rotate(50.52631759643555)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(140, 162, 82);">
+				     爱琴海航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(19,-10)rotate(50.52631759643554)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(181, 207, 107);">
+				     阿拉斯加航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(151,-23)rotate(7.8947367668151855)" style="font-size: 10px; font-family: bold; fill: rgb(206, 219, 156);">
+				     中华航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-186,129)rotate(-15.789473533630371)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(140, 109, 49);">
+				     大韩航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(186,14)rotate(3.1578946113586426)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(189, 158, 57);">
+				     维珍大西洋航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(103,46)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 186, 82);">
+				     达美航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-20,-31)rotate(55.26315689086914)" style="font-size: 10px; font-family: bold; fill: rgb(231, 203, 148);">
+				     马来西亚航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-48,-115)rotate(59.99999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(132, 60, 57);">
+				     俄罗斯航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(190,-19)rotate(45.78947448730469)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(173, 73, 74);">
+				     加拿大航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-92,62)rotate(7.894736766815186)" style="font-size: 10px; font-family: bold; fill: rgb(214, 97, 107);">
+				     挪威航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-118,-142)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(231, 150, 156);">
+				     港龙航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-97,-44)rotate(-1.5789473056793213)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(123, 65, 115);">
+				     亚洲航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(139,47)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(165, 81, 148);">
+				     芬兰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(163,-6)rotate(3.1578946113586426)" style="font-size: 10px; font-family: bold; fill: rgb(206, 109, 189);">
+				     香港航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(89,-113)rotate(-15.789473533630373)" style="font-size: 10px; font-family: bold; fill: rgb(222, 158, 214);">
+				     中国南方航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(40,125)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(57, 59, 121);">
+				     荷兰皇家航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(189,-60)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(82, 84, 163);">
+				     曼谷航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-134,54)rotate(-29.999999999999993)" style="font-size: 10px; font-family: bold; fill: rgb(107, 110, 207);">
+				     韩亚航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(40,-39)rotate(36.315788269042976)" style="font-size: 10px; font-family: bold; fill: rgb(156, 158, 222);">
+				     新西兰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(212,-25)rotate(55.26315689086914)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);">
+				     法国航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(11,137)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(140, 162, 82);">
+				     奥地利航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-83,-77)rotate(-20.526315689086914)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(181, 207, 107);">
+				     日本航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(103,-54)rotate(-1.5789473056793213)" style="font-size: 10px; font-family: bold; fill: rgb(206, 219, 156);">
+				     澳洲航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(252,-7)rotate(41.052631378173835)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(140, 109, 49);">
+				     瑞士国际航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-201,60)rotate(7.8947367668151855)" style="font-size: 10px; font-family: bold; fill: rgb(189, 158, 57);">
+				     维珍澳洲航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-142,-83)rotate(-25.26315879821777)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 186, 82);">
+				     土耳其航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-5,69)rotate(-29.999999999999993)" style="font-size: 10px; font-family: bold; fill: rgb(231, 203, 148);">
+				     泰国航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(80,55)rotate(22.10526275634766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(132, 60, 57);">
+				     印尼鹰航
+				    </text>
+				    <text text-anchor="middle" transform="translate(7,95)rotate(22.10526275634766)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(173, 73, 74);">
+				     海南航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-20,1)rotate(36.315788269042976)" style="font-size: 10px; font-family: bold; fill: rgb(214, 97, 107);">
+				     阿提哈德航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-25,46)rotate(17.36842155456543)skewX(3.1805546814635176e-15)scale(0.9999999999999999,0.9999999999999999)" style="font-size: 10px; font-family: bold; fill: rgb(231, 150, 156);">
+				     汉莎航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(236,-115)rotate(-6.315789222717285)skewX(0)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(123, 65, 115);">
+				     长荣航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(109,134)rotate(59.999999999999986)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(165, 81, 148);">
+				     国泰航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(215,-149)rotate(36.31578826904297)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(206, 109, 189);">
+				     阿联酋航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(11,-166)rotate(60)" style="font-size: 10px; font-family: bold; fill: rgb(222, 158, 214);">
+				     全日空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-207,35)rotate(26.842105865478512)skewX(0)scale(1,1)" style="font-size: 10px; font-family: bold; fill: rgb(57, 59, 121);">
+				     新加坡航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(240,-61)rotate(12.63157844543457)" style="font-size: 10px; font-family: bold; fill: rgb(82, 84, 163);">
+				     卡塔尔航空
+				    </text>
+				    <text text-anchor="middle" transform="translate(-87,-65)rotate(3.1578946113586426)" style="font-size: 10px; font-family: bold; fill: rgb(99, 121, 57);"></text>
+				   </g>
+				  </svg>
+			</div>
+	
+		</div>
+		
+	</section>
+	<section class="main-section" id="part6">
+		<div class="container">
+			<div class="chart" id="chart6"></div>
+			<script type="text/javascript" src="js/chart6.js">	</script>	
+		</div>
+	</section>
+	
+	<section class="main-section" id="part7">
+		<div class="container">
+			
+		</div>
+	</section>
+		<%
+		rs.close(); 
+		statement.close(); 
+		connection.close(); 
+		%>	   	   	
+</body>
+</html>

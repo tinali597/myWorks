@@ -1,0 +1,81 @@
+*{
+margin: 0;
+padding: 0;
+}
+li{
+	list-style: none;
+}
+.nav,
+.main,
+.info{
+width: 1300px;
+margin: 0 auto;
+}
+
+div.nav{
+height: 80px;
+}
+div.name{
+	text-align: center;
+	color: #ffbb45;
+	font-size: 45px;
+}
+div.writer{
+	text-align: center;
+	color: #ffbb45;
+	font-size: 20px;
+}
+
+.main,
+.pie,
+.catlog{
+	height: 650px;
+}
+div.main{
+width: 1300px;
+position: relative;
+}
+div.pie{
+	width:1000px;
+	position: absolute;
+	right:0;
+
+}
+div.pie svg{
+	position: absolute;
+	top:0;
+}
+#hidden{
+	visibility:hidden;
+}
+#show{
+	visibility:visible;
+}
+div.catlog{
+	width: 300px;
+	text-align: center;
+	
+}
+div.catlog ul{
+	line-height:95px;
+}
+
+div.catlog ul li:hover{
+	font-size: 20px;
+	background-color: #F7B32D;
+}
+#selected{
+	background-color: #F7B32D;
+}
+#selected span{
+	font-size: 25px;
+	background-color: #F7B32D;
+}
+
+div.catlog li span{
+	font-size: 15px;
+	color: white;
+}
+div.info{
+height: 200px;
+}
